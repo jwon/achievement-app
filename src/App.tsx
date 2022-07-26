@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Counter, { CounterProps } from './components/Counter';
+import About from './components/About'
+import {
+  BrowserRouter,
+  Link,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
+  const counterProps: CounterProps = {
+    startingCount: 2,
+    countInterval: 100,
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <header className="App-header">
+          <Link to={"/counter"}>Counter</Link>
+          <Link to={"/about"}>About</Link>
+          <Routes>
+            <Route path="/counter" element={<Counter {...counterProps} />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </header>
+      </div>
+    </BrowserRouter>
   );
 }
 
